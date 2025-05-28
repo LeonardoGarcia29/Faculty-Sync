@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: honeydew;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s25.cs151.application.Controllers.CoursesController">
+    <children>
+        <BorderPane prefHeight="96.0" prefWidth="829.0" style="-fx-background-color: #2E4E29;">
+            <center>
+                <Label prefHeight="65.0" prefWidth="448.0" text="Semester's Courses" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="Verdana Bold" size="40.0" />
+                    </font>
+                </Label>
+            </center>
+        </BorderPane>
+        <VBox layoutX="190.0" layoutY="139.0" prefHeight="58.0" prefWidth="162.0" spacing="5.0">
+            <children>
+                <Label text="Course Code">
+                    <font>
+                        <Font name="Verdana Bold" size="17.0" />
+                    </font>
+                </Label>
+                <TextField id="courseCodeField" fx:id="courseCodeField" promptText="Ex. CS151" />
+            </children>
+        </VBox>
+        <VBox layoutX="350.0" layoutY="139.0" prefHeight="58.0" prefWidth="162.0" spacing="5.0">
+            <children>
+                <Label text="Course Name">
+                    <font>
+                        <Font name="Verdana Bold" size="17.0" />
+                    </font>
+                </Label>
+                <TextField id="courseNameField" fx:id="courseNameField" promptText="Ex. Object-Oriented Design" />
+            </children>
+        </VBox>
+        <VBox layoutX="510.0" layoutY="139.0" prefHeight="58.0" prefWidth="162.0" spacing="5.0">
+            <children>
+                <Label text="Course Section">
+                    <font>
+                        <Font name="Verdana Bold" size="17.0" />
+                    </font>
+                </Label>
+                <TextField id="courseSectionField" fx:id="courseSectionField" promptText="Ex. 01, 04" />
+            </children>
+        </VBox>
+        <Button layoutX="383.0" layoutY="208.0" mnemonicParsing="false" onAction="#SubmitOp" prefHeight="30.0" prefWidth="96.0" style="-fx-background-color: #5A8C2B;" text="Submit" textFill="WHITE">
+            <font>
+                <Font size="15.0" />
+            </font></Button>
+        <TableView fx:id="coursesTable" layoutX="172.0" layoutY="257.0" prefHeight="249.0" prefWidth="519.0">
+            <columns>
+                <TableColumn fx:id="courseCodeColumn" prefWidth="100.0" text="Code" />
+                <TableColumn fx:id="courseNameColumn" prefWidth="320.0" text="Name" />
+                <TableColumn fx:id="courseSectionColumn" prefWidth="99.0" text="Section" />
+            </columns>
+        </TableView>
+        <Button id="homeBtn" layoutX="722.0" layoutY="536.0" mnemonicParsing="false" onAction="#HomeOp" prefHeight="41.0" prefWidth="80.0" style="-fx-background-color: #F7B733;" text="HOME" textOverrun="CLIP">
+            <font>
+                <Font size="13.5" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

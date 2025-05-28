@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: honeydew;"
+            xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="s25.cs151.application.Controllers.OfficeHoursController">
+   <BorderPane prefHeight="96.0" prefWidth="830.0" style="-fx-background-color: #2E4E29;">
+      <center>
+         <Label prefHeight="65.0" prefWidth="546.0" text="Semester's Office Hours" textAlignment="CENTER"
+                textFill="WHITE" BorderPane.alignment="CENTER">
+            <font>
+               <Font name="Verdana Bold" size="40.0"/>
+            </font>
+         </Label>
+      </center>
+   </BorderPane>
+   <Button layoutX="371.0" layoutY="213.0" mnemonicParsing="false" onAction="#SubmitOp" prefHeight="30.0"
+           prefWidth="96.0" style="-fx-background-color: #5A8C2B;" text="Submit" textFill="WHITE">
+      <font>
+         <Font size="15.0"/>
+      </font>
+   </Button>
+   <TableView fx:id="officeHoursTable" layoutX="170.0" layoutY="265.0" prefHeight="229.0" prefWidth="528.0">
+      <columns>
+         <TableColumn fx:id="semesterColumn" prefWidth="116.0" text="Semester"/>
+         <TableColumn fx:id="yearColumn" prefWidth="100.0" text="Year"/>
+         <TableColumn fx:id="daysColumn" prefWidth="322.0" text="Days"/>
+      </columns>
+   </TableView>
+   <Button id="homeBtn" layoutX="722.0" layoutY="536.0" mnemonicParsing="false" onAction="#HomeOp" prefHeight="41.0"
+           prefWidth="80.0" style="-fx-background-color: #F7B733;" text="HOME" textOverrun="CLIP">
+      <font>
+         <Font size="13.5"/>
+      </font>
+   </Button>
+   <HBox alignment="CENTER" layoutY="120.0" prefHeight="68.0" prefWidth="829.0" spacing="30.0">
+      <children>
+         <VBox prefHeight="66.0" prefWidth="100.0" spacing="5.0">
+            <children>
+               <Label text="Semester">
+                  <font>
+                     <Font name="Verdana Bold" size="18.0"/>
+                  </font>
+               </Label>
+               <ComboBox fx:id="semesterDropdown" prefWidth="150.0" promptText="Spring"/>
+            </children>
+         </VBox>
+         <VBox prefHeight="58.0" prefWidth="162.0" spacing="5.0">
+            <children>
+               <Label text="Year">
+                  <font>
+                     <Font name="Verdana Bold" size="18.0"/>
+                  </font>
+               </Label>
+               <TextField id="yearField" fx:id="yearField" promptText="Ex. 2025">
+                  <font>
+                     <Font size="13.0"/>
+                  </font>
+               </TextField>
+            </children>
+         </VBox>
+         <VBox prefHeight="71.0" prefWidth="458.0">
+            <children>
+               <Label alignment="TOP_LEFT" prefHeight="30.0" prefWidth="658.0" text="Days">
+                  <font>
+                     <Font name="Verdana Bold" size="18.0"/>
+                  </font>
+               </Label>
+               <HBox alignment="CENTER_LEFT" prefHeight="35.0" prefWidth="658.0" spacing="25.0">
+                  <children>
+                     <CheckBox id="mon" fx:id="mon" mnemonicParsing="false" text="Monday"/>
+                     <CheckBox id="tue" fx:id="tue" mnemonicParsing="false" text="Tuesday"/>
+                     <CheckBox id="wed" fx:id="wed" mnemonicParsing="false" text="Wednesday"/>
+                     <CheckBox id="thu" fx:id="thu" mnemonicParsing="false" text="Thursday"/>
+                     <CheckBox id="fri" fx:id="fri" mnemonicParsing="false" text="Friday"/>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+      </children>
+      <padding>
+         <Insets left="18.0"/>
+      </padding>
+   </HBox>
+</AnchorPane>

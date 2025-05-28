@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: honeydew;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="s25.cs151.application.Controllers.SearchScheduleController">
+    <children>
+        <BorderPane layoutX="-6.0" prefHeight="96.0" prefWidth="829.0" style="-fx-background-color: #2E4E29;">
+            <center>
+                <Label text="Search Office Hours" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="Verdana Bold" size="40.0" />
+                    </font>
+                </Label>
+            </center>
+        </BorderPane>
+
+        <Button layoutX="700.0" layoutY="540.0" mnemonicParsing="false" onAction="#HomeOp" prefHeight="40.0" prefWidth="80.0" style="-fx-background-color: #F7B733;" text="HOME">
+            <font>
+                <Font size="13.5" />
+            </font>
+        </Button>
+          <Button layoutX="372.0" layoutY="253.0" onAction="#handleSearch" prefHeight="31.0" prefWidth="97.0" style="-fx-background-color: #5A8C2B;" text="Search" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Button>
+      <TableView fx:id="resultsTable" layoutX="131.0" layoutY="317.0" prefHeight="155.0" prefWidth="595.0">
+         <columns>
+            <TableColumn fx:id="dateColumn" prefWidth="80.0" text="Date" />
+            <TableColumn fx:id="timeSlotColumn" prefWidth="90.0" text="Time" />
+            <TableColumn fx:id="nameColumn" prefWidth="100.0" text="Name" />
+            <TableColumn fx:id="courseColumn" prefWidth="75.0" text="Course" />
+            <TableColumn fx:id="reasonColumn" prefWidth="125.0" text="Reason" />
+            <TableColumn fx:id="commentColumn" prefWidth="125.0" text="Comment" />
+         </columns>
+      </TableView>
+      <TextField fx:id="searchField" layoutX="238.0" layoutY="196.0" prefHeight="25.0" prefWidth="364.0" promptText="Enter student's name" />
+      <Button layoutX="34.0" layoutY="540.0" onAction="#handleDelete" prefHeight="31.0" prefWidth="97.0" style="-fx-background-color: #5A8C2B;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="Verdana" size="14.0" />
+         </font>
+      </Button>
+    </children>
+</AnchorPane>
