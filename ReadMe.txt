@@ -1,18 +1,19 @@
-# Name of application: FacultySync
+## Name of application: FacultySync
 # Version: 0.8
+
 ## Built With:
 -Java 23
 -IntelliJ IDE
 
-# who did what for veresion 0.8:
+## Contributors who did what for veresion 0.8:
 1. Amy Do: EditSchedule-view, handling search action, edit page set up
 2. Angelo Abellan:  setTimeSlots-view, TimeSlotsController, ScheduleController
 3. Leonardo Garcia: Delete feature for edit schedule page, set up edit page UI 
 4. Omar Yassin: Sorted entries for schedule search
 
-# Any other instruction that users need to know:
+## Any other instruction that users need to know:
 
--Polymorphism
+Polymorphism Usage 
 
 Parent Interface Class - Concrete Child Class
 
