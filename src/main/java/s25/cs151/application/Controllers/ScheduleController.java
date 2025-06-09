@@ -7,9 +7,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import s25.cs151.application.DAOInterfaces.ScheduleDAOInt;
-import s25.cs151.application.DAOs.CoursesDAO;
-import s25.cs151.application.DAOs.ScheduleDAO;
-import s25.cs151.application.DAOs.TimeSlotsDAO;
+import s25.cs151.application.DAOs.CoursesDAO_CSV;
+import s25.cs151.application.DAOs.ScheduleDAO_CSV;
+import s25.cs151.application.DAOs.TimeSlotsDAO_CSV;
 import s25.cs151.application.JavaBeans.CourseDataBean;
 import s25.cs151.application.JavaBeans.ScheduleBean;
 import s25.cs151.application.JavaBeans.TimeSlotBean;
@@ -62,7 +62,7 @@ public class ScheduleController {
     public void initialize() {
         ScheduleDate.setValue(LocalDate.now());
 
-        TimeSlotsDAO timeDAO = new TimeSlotsDAO("permanentData/timeslots.csv");
+        TimeSlotsDAO_CSV timeDAO = new TimeSlotsDAO_CSV("permanentData/timeslots.csv");
         List<TimeSlotBean> timeSlots = timeDAO.getTimeSlots();
         ObservableList<String> timeOptions = FXCollections.observableArrayList();
         for (TimeSlotBean slot : timeSlots) {
@@ -73,7 +73,7 @@ public class ScheduleController {
             TimeCombo.getSelectionModel().selectFirst();
         }
 
-        CoursesDAO courseDAO = new CoursesDAO("permanentData/courseEntries.csv");
+        CoursesDAO_CSV courseDAO = new CoursesDAO_CSV("permanentData/courseEntries.csv");
         List<CourseDataBean> courses = courseDAO.getCourses();
         ObservableList<String> courseOptions = FXCollections.observableArrayList();
         for (CourseDataBean course : courses) {
@@ -83,7 +83,7 @@ public class ScheduleController {
         if (!courseOptions.isEmpty()) {
             CourseCombo.getSelectionModel().selectFirst();
         }
-        csvManager = new ScheduleDAO("permanentData/schedules.csv");
+        csvManager = new ScheduleDAO_CSV("permanentData/schedules.csv");
 
         csvManager.sortedSchedules();
 

@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import s25.cs151.application.DAOInterfaces.ScheduleDAOInt;
-import s25.cs151.application.DAOs.ScheduleDAO;
+import s25.cs151.application.DAOs.ScheduleDAO_CSV;
 import s25.cs151.application.JavaBeans.ScheduleBean;
 import s25.cs151.application.Main;
 
@@ -45,7 +45,7 @@ public class SearchScheduleController {
 
     @FXML
     public void initialize() {
-        csvManager = new ScheduleDAO("permanentData/schedules.csv");
+        csvManager = new ScheduleDAO_CSV("permanentData/schedules.csv");
 
         nameColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getStudentName()));
         courseColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getCourse()));

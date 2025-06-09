@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import s25.cs151.application.DAOInterfaces.CourseDAOInt;
-import s25.cs151.application.DAOs.CoursesDAO;
+import s25.cs151.application.DAOs.CoursesDAO_CSV;
 import s25.cs151.application.JavaBeans.CourseDataBean;
 import s25.cs151.application.Main;
 
@@ -44,7 +44,7 @@ public class CoursesController {
     @FXML
     public void initialize() {
 
-        csvManager = new CoursesDAO("permanentData/courseEntries.csv");
+        csvManager = new CoursesDAO_CSV("permanentData/courseEntries.csv");
 
         courseCodeColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getCourseCode()));
         courseNameColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getCourseName()));

@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class OfficeHoursDAO implements OfficeHoursDAOInt {
+public class OfficeHoursDAO_CSV implements OfficeHoursDAOInt {
 
     private final String filename;
 
-    public OfficeHoursDAO(String filename){
+    public OfficeHoursDAO_CSV(String filename){
         this.filename = filename;
     }
 

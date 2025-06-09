@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class CoursesDAO implements CourseDAOInt {
+public class CoursesDAO_CSV implements CourseDAOInt {
 
     private final String filename;
 
-    public CoursesDAO(String filename){
+    public CoursesDAO_CSV(String filename){
         this.filename = filename;
     }
 

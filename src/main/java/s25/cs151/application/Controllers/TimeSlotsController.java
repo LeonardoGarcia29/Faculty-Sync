@@ -10,7 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import s25.cs151.application.DAOInterfaces.TimeSlotsDAOInt;
-import s25.cs151.application.DAOs.TimeSlotsDAO;
+import s25.cs151.application.DAOs.TimeSlotsDAO_CSV;
 import s25.cs151.application.Main;
 import s25.cs151.application.JavaBeans.TimeSlotBean;
 
@@ -45,7 +45,7 @@ public class TimeSlotsController {
                 toHourCombo.getItems().add(time);
             }
         }
-        csvManager = new TimeSlotsDAO("permanentData/timeslots.csv");
+        csvManager = new TimeSlotsDAO_CSV("permanentData/timeslots.csv");
 
         csvManager.sortTimeSlots();
 

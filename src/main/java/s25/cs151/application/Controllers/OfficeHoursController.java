@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import s25.cs151.application.DAOInterfaces.OfficeHoursDAOInt;
-import s25.cs151.application.DAOs.OfficeHoursDAO;
+import s25.cs151.application.DAOs.OfficeHoursDAO_CSV;
 import s25.cs151.application.Main;
 import s25.cs151.application.JavaBeans.OfficeHoursDataBean;
 
@@ -46,7 +46,7 @@ public class OfficeHoursController {
         semesterDropdown.setItems(FXCollections.observableArrayList("Spring", "Summer", "Fall", "Winter"));
         semesterDropdown.setValue("Spring");
 
-        csvManager = new OfficeHoursDAO("permanentData/semesterEntries.csv");
+        csvManager = new OfficeHoursDAO_CSV("permanentData/semesterEntries.csv");
 
         semesterColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getSemester()));
         yearColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getYear()));

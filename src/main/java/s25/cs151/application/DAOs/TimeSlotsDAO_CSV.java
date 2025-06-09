@@ -1,7 +1,6 @@
 package s25.cs151.application.DAOs;
 
 import s25.cs151.application.DAOInterfaces.TimeSlotsDAOInt;
-import s25.cs151.application.JavaBeans.OfficeHoursDataBean;
 import s25.cs151.application.JavaBeans.TimeSlotBean;
 
 import java.io.File;
@@ -12,10 +11,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
-public class TimeSlotsDAO implements TimeSlotsDAOInt {
+public class TimeSlotsDAO_CSV implements TimeSlotsDAOInt {
     private final String filename;
 
-    public TimeSlotsDAO(String filename){
+    public TimeSlotsDAO_CSV(String filename){
         this.filename = filename;
     }
     public void storeTimeSlots(TimeSlotBean entry) {

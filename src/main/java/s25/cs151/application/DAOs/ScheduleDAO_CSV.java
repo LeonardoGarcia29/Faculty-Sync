@@ -1,9 +1,7 @@
 package s25.cs151.application.DAOs;
 
 import s25.cs151.application.DAOInterfaces.ScheduleDAOInt;
-import s25.cs151.application.JavaBeans.CourseDataBean;
 import s25.cs151.application.JavaBeans.ScheduleBean;
-import s25.cs151.application.JavaBeans.TimeSlotBean;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class ScheduleDAO implements ScheduleDAOInt {
+public class ScheduleDAO_CSV implements ScheduleDAOInt {
 
     private final String filename;
 
-    public ScheduleDAO(String filename){
+    public ScheduleDAO_CSV(String filename){
         this.filename = filename;
     }
 
