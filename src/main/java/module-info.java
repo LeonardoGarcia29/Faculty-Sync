@@ -5,6 +5,7 @@ module s25.cs151.application {
     requires com.dlsc.formsfx;
     requires java.desktop;
     requires java.sql;
+    requires jdk.security.jgss;
 
     opens s25.cs151.application to javafx.fxml;
     opens s25.cs151.application.Controllers to javafx.fxml;

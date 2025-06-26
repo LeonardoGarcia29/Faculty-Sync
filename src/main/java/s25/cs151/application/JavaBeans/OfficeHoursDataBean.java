@@ -5,12 +5,15 @@ public class OfficeHoursDataBean {
     private String semester;
     private String year;
     private String selectedDays;
-    private boolean[] days; //maybe change to something different
 
+    public OfficeHoursDataBean(){
+        selectedDays = "N/A";
+        semester = "N/A";
+        year = "N/A";
+    }
     public OfficeHoursDataBean(String semester, String year, boolean[] days){
         this.semester = semester.trim();
         this.year = year.trim();
-        this.days = days;
         this.selectedDays = "";
 
         if(days[0]){
@@ -47,6 +50,10 @@ public class OfficeHoursDataBean {
     public String getDays() {
         return selectedDays;
     }
+
+    public void setSemester(String semester){this.semester = semester;}
+    public void setYear(String year){this.year = year;}
+    public void setSelectedDays(String selectedDays){this.selectedDays = selectedDays;}
 
     @Override
     public String toString() {

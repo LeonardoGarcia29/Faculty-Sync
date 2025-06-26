@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import s25.cs151.application.DAOInterfaces.OfficeHoursDAOInt;
 import s25.cs151.application.DAOs.OfficeHoursDAO_CSV;
+import s25.cs151.application.DAOs.OfficeHoursDAO_SQLite;
 import s25.cs151.application.Main;
 import s25.cs151.application.JavaBeans.OfficeHoursDataBean;
 
@@ -46,8 +47,7 @@ public class OfficeHoursController {
         semesterDropdown.setItems(FXCollections.observableArrayList("Spring", "Summer", "Fall", "Winter"));
         semesterDropdown.setValue("Spring");
 
-        csvManager = new OfficeHoursDAO_CSV("permanentData/semesterEntries.csv");
-
+        csvManager = new OfficeHoursDAO_SQLite("jdbc:sqlite:permanentData/faculty_sync_data.db");
         semesterColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getSemester()));
         yearColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getYear()));
         daysColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getDays()));
@@ -120,6 +120,12 @@ public class OfficeHoursController {
     @FXML
     private void HomeOp(ActionEvent event) {
         Main.loadHomeView();
+        if(csvManager instanceof OfficeHoursDAO_SQLite){
+            ((OfficeHoursDAO_SQLite) csvManager).closeDBConnection();
+        }
+        else{
+            System.out.println("Data Manager closing method cannot be perform!");
+        }
     }
 
     @FXML
