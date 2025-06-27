@@ -1,4 +1,4 @@
-package s25.cs151.application.DAOs;
+package s25.cs151.application.DAOs.CSV;
 
 import s25.cs151.application.DAOInterfaces.ScheduleDAOInt;
 import s25.cs151.application.JavaBeans.ScheduleBean;

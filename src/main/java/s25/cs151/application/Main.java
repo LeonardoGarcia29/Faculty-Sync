@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import s25.cs151.application.DAOs.SQLite.sqliteConnect;
 
 import java.util.Objects;
 
@@ -14,7 +15,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage)  {
+        sqliteConnect.establishSqliteConnection("jdbc:sqlite:permanentData/faculty_sync_data.db");
         primaryStage = stage;
+        primaryStage.setOnCloseRequest(event -> {
+            sqliteConnect.closeSqliteConnection();
+        });
         loadHomeView();
     }
 

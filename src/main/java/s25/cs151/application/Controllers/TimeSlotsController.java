@@ -10,7 +10,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import s25.cs151.application.DAOInterfaces.TimeSlotsDAOInt;
-import s25.cs151.application.DAOs.TimeSlotsDAO_CSV;
+import s25.cs151.application.DAOs.SQLite.TimeSlotsDAO_SQLite;
 import s25.cs151.application.Main;
 import s25.cs151.application.JavaBeans.TimeSlotBean;
 
@@ -32,7 +32,7 @@ public class TimeSlotsController {
     @FXML
     private TableView<TimeSlotBean> TimeSlotTable;
 
-    private TimeSlotsDAOInt csvManager;
+    private TimeSlotsDAOInt dataManager;
     private ObservableList<TimeSlotBean> timeSlotsData;
 
     @FXML
@@ -45,13 +45,13 @@ public class TimeSlotsController {
                 toHourCombo.getItems().add(time);
             }
         }
-        csvManager = new TimeSlotsDAO_CSV("permanentData/timeslots.csv");
+        dataManager = new TimeSlotsDAO_SQLite();
 
-        csvManager.sortTimeSlots();
+        dataManager.sortTimeSlots();
 
         TimeFromCol.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getFromHour()));
         TimeToCol.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getToHour()));
-        List<TimeSlotBean> entries = csvManager.getTimeSlots();
+        List<TimeSlotBean> entries = dataManager.getTimeSlots();
         timeSlotsData = FXCollections.observableArrayList(entries);
         TimeSlotTable.setItems(timeSlotsData);
     }
@@ -70,10 +70,10 @@ public class TimeSlotsController {
 
             TimeSlotBean entry = new TimeSlotBean(from, to);
 
-            csvManager.storeTimeSlots(entry);
-            csvManager.sortTimeSlots();
+            dataManager.storeTimeSlots(entry);
+            dataManager.sortTimeSlots();
 
-            List<TimeSlotBean> entries = csvManager.getTimeSlots();
+            List<TimeSlotBean> entries = dataManager.getTimeSlots();
             timeSlotsData = FXCollections.observableArrayList(entries);
             TimeSlotTable.setItems(timeSlotsData);
 

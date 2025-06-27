@@ -3,6 +3,7 @@ package s25.cs151.application.Controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import s25.cs151.application.DAOs.SQLite.sqliteConnect;
 import s25.cs151.application.Main;
 
 import static javafx.application.Platform.*;
@@ -13,7 +14,6 @@ public class HomePageController {
     public AnchorPane HomePageBox;
     @FXML
     private void SetOfficeHoursOp(ActionEvent event) {
-
         Main.loadOfficeHoursView();
     }
 
@@ -33,15 +33,12 @@ public class HomePageController {
         Main.loadScheduleView();
     }
 
-
-
-
     @FXML
     private void QuitPlatformOp(ActionEvent event) {
+        sqliteConnect.closeSqliteConnection();
         exit();
 
     }
-
 
     public void searchScheduleOp(ActionEvent actionEvent) {
         Main.loadSearchScheduleView();

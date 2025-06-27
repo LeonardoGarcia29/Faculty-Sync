@@ -1,4 +1,4 @@
-package s25.cs151.application.DAOs;
+package s25.cs151.application.DAOs.SQLite;
 
 import s25.cs151.application.DAOInterfaces.OfficeHoursDAOInt;
 import s25.cs151.application.JavaBeans.OfficeHoursDataBean;
@@ -10,18 +10,10 @@ import java.util.List;
 public class OfficeHoursDAO_SQLite implements OfficeHoursDAOInt {
 
     Connection connector;
-    String filename;
 
-    public OfficeHoursDAO_SQLite(String filename){
-        this.filename = filename;
+    public OfficeHoursDAO_SQLite(){
 
-        //Create connection to DB
-        try{
-            connector = DriverManager.getConnection(filename);
-            System.out.println("Connection to db was successful for office_hours_schedule");
-        } catch (SQLException e) {
-            System.out.println("Connection to office_hours_schedule could not be  done!");
-        }
+        connector = sqliteConnect.getConnector();
 
         //Make the table, if not created yet
         String createTable = "CREATE TABLE IF NOT EXISTS office_hours_schedule (\n"
@@ -33,15 +25,8 @@ public class OfficeHoursDAO_SQLite implements OfficeHoursDAOInt {
         try(Statement smt = connector.createStatement()){
             smt.execute(createTable);
             System.out.println("office_hours_schedule table was created");
-        } catch (Exception e) {
-            System.out.println("office_hours_schedule table could not be created");
-        }
-    }
-    public void closeDBConnection(){
-        try{
-            connector.close();
         } catch (SQLException e) {
-            System.out.println("DB connector could not be close for office_hours_schedule!");
+            System.out.println("office_hours_schedule table could not be created");
         }
     }
     public void storeSemesterOfficeHours(OfficeHoursDataBean entry){
@@ -79,7 +64,7 @@ public class OfficeHoursDAO_SQLite implements OfficeHoursDAOInt {
             }
 
             System.out.println("Data retrieval was successful from: office_hours_schedule");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Failed to retrieve data from: office_hours_schedule");
         }
 

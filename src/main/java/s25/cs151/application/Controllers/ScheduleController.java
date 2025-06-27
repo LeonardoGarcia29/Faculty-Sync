@@ -7,9 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import s25.cs151.application.DAOInterfaces.ScheduleDAOInt;
-import s25.cs151.application.DAOs.CoursesDAO_CSV;
-import s25.cs151.application.DAOs.ScheduleDAO_CSV;
-import s25.cs151.application.DAOs.TimeSlotsDAO_CSV;
+import s25.cs151.application.DAOs.CSV.CoursesDAO_CSV;
+import s25.cs151.application.DAOs.CSV.ScheduleDAO_CSV;
+import s25.cs151.application.DAOs.CSV.TimeSlotsDAO_CSV;
+import s25.cs151.application.DAOs.SQLite.CoursesDAO_SQLite;
+import s25.cs151.application.DAOs.SQLite.ScheduleDAO_SQLite;
+import s25.cs151.application.DAOs.SQLite.TimeSlotsDAO_SQLite;
 import s25.cs151.application.JavaBeans.CourseDataBean;
 import s25.cs151.application.JavaBeans.ScheduleBean;
 import s25.cs151.application.JavaBeans.TimeSlotBean;
@@ -55,14 +58,14 @@ public class ScheduleController {
     @FXML
     private TableColumn<ScheduleBean, String> commentColumn;
 
-    private ScheduleDAOInt csvManager;
+    private ScheduleDAOInt dataManager;
     private ObservableList<ScheduleBean> scheduleData;
 
     @FXML
     public void initialize() {
         ScheduleDate.setValue(LocalDate.now());
 
-        TimeSlotsDAO_CSV timeDAO = new TimeSlotsDAO_CSV("permanentData/timeslots.csv");
+        TimeSlotsDAO_SQLite timeDAO = new TimeSlotsDAO_SQLite();
         List<TimeSlotBean> timeSlots = timeDAO.getTimeSlots();
         ObservableList<String> timeOptions = FXCollections.observableArrayList();
         for (TimeSlotBean slot : timeSlots) {
@@ -73,7 +76,7 @@ public class ScheduleController {
             TimeCombo.getSelectionModel().selectFirst();
         }
 
-        CoursesDAO_CSV courseDAO = new CoursesDAO_CSV("permanentData/courseEntries.csv");
+        CoursesDAO_SQLite courseDAO = new CoursesDAO_SQLite();
         List<CourseDataBean> courses = courseDAO.getCourses();
         ObservableList<String> courseOptions = FXCollections.observableArrayList();
         for (CourseDataBean course : courses) {
@@ -83,9 +86,9 @@ public class ScheduleController {
         if (!courseOptions.isEmpty()) {
             CourseCombo.getSelectionModel().selectFirst();
         }
-        csvManager = new ScheduleDAO_CSV("permanentData/schedules.csv");
+        dataManager = new ScheduleDAO_SQLite();
 
-        csvManager.sortedSchedules();
+        dataManager.sortedSchedules();
 
         dateColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getScheduleDate()));
         courseColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getCourse()));
@@ -128,7 +131,7 @@ public class ScheduleController {
             }
         });
 
-        List<ScheduleBean> scheduleEntries = csvManager.getSchedules();
+        List<ScheduleBean> scheduleEntries = dataManager.getSchedules();
         scheduleData = FXCollections.observableArrayList(scheduleEntries);
         scheduleTable.setItems(scheduleData);
     }
@@ -170,11 +173,11 @@ public class ScheduleController {
                 comment
         );
 
-        csvManager.storeASchedule(schedule);
+        dataManager.storeASchedule(schedule);
 
-        csvManager.sortedSchedules();
+        dataManager.sortedSchedules();
 
-        List<ScheduleBean> scheduleEntries = csvManager.getSchedules();
+        List<ScheduleBean> scheduleEntries = dataManager.getSchedules();
         scheduleData = FXCollections.observableArrayList(scheduleEntries);
         scheduleTable.setItems(scheduleData);
 

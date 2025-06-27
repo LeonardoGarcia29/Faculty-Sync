@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import s25.cs151.application.DAOInterfaces.CourseDAOInt;
-import s25.cs151.application.DAOs.CoursesDAO_CSV;
+import s25.cs151.application.DAOs.SQLite.CoursesDAO_SQLite;
 import s25.cs151.application.JavaBeans.CourseDataBean;
 import s25.cs151.application.Main;
 
@@ -38,19 +38,19 @@ public class CoursesController {
     @FXML
     private TableView<CourseDataBean> coursesTable;
 
-    private CourseDAOInt csvManager;
+    private CourseDAOInt dataManager;
     private ObservableList<CourseDataBean> courseData;
 
     @FXML
     public void initialize() {
 
-        csvManager = new CoursesDAO_CSV("permanentData/courseEntries.csv");
+        dataManager = new CoursesDAO_SQLite();
 
         courseCodeColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getCourseCode()));
         courseNameColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getCourseName()));
         courseSectionColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getCourseSection()));
 
-        List<CourseDataBean> entries = csvManager.getCourses();
+        List<CourseDataBean> entries = dataManager.getCourses();
         courseData = FXCollections.observableArrayList(entries);
         coursesTable.setItems(courseData);
     }
@@ -90,10 +90,10 @@ public class CoursesController {
             courseData.clear();
             coursesTable.setItems(courseData);
 
-            csvManager.storeCourses(entry);
-            csvManager.displaySortedCourses();
+            dataManager.storeCourses(entry);
+            dataManager.displaySortedCourses();
 
-            List<CourseDataBean> entries = csvManager.getCourses();
+            List<CourseDataBean> entries = dataManager.getCourses();
             courseData = FXCollections.observableArrayList(entries);
             coursesTable.setItems(courseData);
 

@@ -1,4 +1,4 @@
-package s25.cs151.application.DAOs;
+package s25.cs151.application.DAOs.CSV;
 
 import s25.cs151.application.DAOInterfaces.TimeSlotsDAOInt;
 import s25.cs151.application.JavaBeans.TimeSlotBean;

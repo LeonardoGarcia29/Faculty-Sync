@@ -6,7 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import s25.cs151.application.DAOInterfaces.ScheduleDAOInt;
-import s25.cs151.application.DAOs.ScheduleDAO_CSV;
+import s25.cs151.application.DAOs.CSV.ScheduleDAO_CSV;
+import s25.cs151.application.DAOs.SQLite.ScheduleDAO_SQLite;
 import s25.cs151.application.JavaBeans.ScheduleBean;
 import s25.cs151.application.Main;
 
@@ -40,12 +41,12 @@ public class SearchScheduleController {
     @FXML
     private TableColumn<ScheduleBean, java.time.LocalDate> dateColumn;
 
-    private ScheduleDAOInt csvManager;
+    private ScheduleDAOInt dataManager;
     private ObservableList<ScheduleBean> filteredData;
 
     @FXML
     public void initialize() {
-        csvManager = new ScheduleDAO_CSV("permanentData/schedules.csv");
+        dataManager = new ScheduleDAO_SQLite();
 
         nameColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getStudentName()));
         courseColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleObjectProperty<>(cellData.getValue().getCourse()));
@@ -58,7 +59,7 @@ public class SearchScheduleController {
     @FXML
     private void handleSearch(ActionEvent event) {
         String query = searchField.getText().toLowerCase().trim();
-        List<ScheduleBean> allSchedules = csvManager.getSchedules();
+        List<ScheduleBean> allSchedules = dataManager.getSchedules();
 
         List<ScheduleBean> result = allSchedules.stream()
                 .filter(s -> s.getStudentName().toLowerCase().contains(query))
@@ -76,9 +77,7 @@ public class SearchScheduleController {
         if (resultsTable.getSelectionModel().getSelectedItem() != null) {
 
             ScheduleBean deleteItem = resultsTable.getSelectionModel().getSelectedItem();
-            List<ScheduleBean> allSchedules = csvManager.getSchedules();
-            allSchedules.remove(deleteItem);
-            csvManager.storeSchedules(allSchedules);
+            ((ScheduleDAO_SQLite) dataManager).deleteSchedule(deleteItem);
             handleSearch(new ActionEvent());
         }
         else{

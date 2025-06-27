@@ -10,6 +10,6 @@ public interface TimeSlotsDAOInt {
 
     List<TimeSlotBean> getTimeSlots();
 
-    public void sortTimeSlots();
+    void sortTimeSlots();
 
 }

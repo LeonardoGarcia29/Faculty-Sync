@@ -7,8 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import s25.cs151.application.DAOInterfaces.OfficeHoursDAOInt;
-import s25.cs151.application.DAOs.OfficeHoursDAO_CSV;
-import s25.cs151.application.DAOs.OfficeHoursDAO_SQLite;
+import s25.cs151.application.DAOs.SQLite.OfficeHoursDAO_SQLite;
 import s25.cs151.application.Main;
 import s25.cs151.application.JavaBeans.OfficeHoursDataBean;
 
@@ -39,7 +38,7 @@ public class OfficeHoursController {
     @FXML
     private TableView<OfficeHoursDataBean> officeHoursTable;
 
-    private OfficeHoursDAOInt csvManager;
+    private OfficeHoursDAOInt dataManager;
     private ObservableList<OfficeHoursDataBean> officeHourData;
 
     @FXML
@@ -47,13 +46,13 @@ public class OfficeHoursController {
         semesterDropdown.setItems(FXCollections.observableArrayList("Spring", "Summer", "Fall", "Winter"));
         semesterDropdown.setValue("Spring");
 
-        csvManager = new OfficeHoursDAO_SQLite("jdbc:sqlite:permanentData/faculty_sync_data.db");
+        dataManager = new OfficeHoursDAO_SQLite();
         semesterColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getSemester()));
         yearColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getYear()));
         daysColumn.setCellValueFactory(CellData -> new SimpleObjectProperty<>(CellData.getValue().getDays()));
 
 
-        List<OfficeHoursDataBean> entries = csvManager.getSemesterOfficeHours();
+        List<OfficeHoursDataBean> entries = dataManager.getSemesterOfficeHours();
         officeHourData = FXCollections.observableArrayList(entries);
         officeHoursTable.setItems(officeHourData);
     }
@@ -105,10 +104,10 @@ public class OfficeHoursController {
 
             OfficeHoursDataBean entry = new OfficeHoursDataBean(semesterDropdown.getValue(), yearText, days);
 
-            csvManager.storeSemesterOfficeHours(entry);
-            csvManager.displaySortedOfficeHours();
+            dataManager.storeSemesterOfficeHours(entry);
+            dataManager.displaySortedOfficeHours();
 
-            List<OfficeHoursDataBean> entries = csvManager.getSemesterOfficeHours();
+            List<OfficeHoursDataBean> entries = dataManager.getSemesterOfficeHours();
             officeHourData = FXCollections.observableArrayList(entries);
             officeHoursTable.setItems(officeHourData);
 
@@ -120,12 +119,6 @@ public class OfficeHoursController {
     @FXML
     private void HomeOp(ActionEvent event) {
         Main.loadHomeView();
-        if(csvManager instanceof OfficeHoursDAO_SQLite){
-            ((OfficeHoursDAO_SQLite) csvManager).closeDBConnection();
-        }
-        else{
-            System.out.println("Data Manager closing method cannot be perform!");
-        }
     }
 
     @FXML
