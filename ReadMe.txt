@@ -1,14 +1,15 @@
 ## Name of application: FacultySync
-# Version: 0.8
+# Version: 0.9
 
 ## Built With:
 -Java 23
+-SQLite
 -IntelliJ IDE
 
 ## Contributors who did what for veresion 0.8:
 1. Amy Do: EditSchedule-view, handling search action, edit page set up
 2. Angelo Abellan:  setTimeSlots-view, TimeSlotsController, ScheduleController
-3. Leonardo Garcia: Delete feature for edit schedule page, set up edit page UI 
+3. Leonardo Garcia: Delete feature for edit schedule page, set up edit page UI, and implemeted SQlite system
 4. Omar Yassin: Sorted entries for schedule search
 
 ## Any other instruction that users need to know:
